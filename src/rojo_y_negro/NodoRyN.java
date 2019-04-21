@@ -70,7 +70,7 @@ public class NodoRyN<T>  {
 	
 	public boolean isLeaf() {
 		
-		if(leftSon == null && rightSon == null) {
+		if(leftSon != null || rightSon != null) {
 			return true;
 		}else {
 			return false;
