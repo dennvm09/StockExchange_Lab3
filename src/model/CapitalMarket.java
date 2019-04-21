@@ -27,66 +27,36 @@ public class CapitalMarket{
 		this.root = root;
 	}
 
-	
-	public void leftRotate(CapitalAction rotate) {
+	//menor accion de capital
+	public CapitalAction lessAction() {
 		
-		CapitalAction aux = rotate;
-		rotate = rotate.getRightSon();
-		aux.setRightSon(rotate.getLeftSon());
-		rotate.setLeftSon(aux);
-		
-		if (aux.getFather().getLeftSon() == aux) {
-			aux.getFather().setLeftSon(rotate);
-			
-		} else {
-			aux.getFather().setRightSon(rotate);;	
-		}
-		
-		rotate.setFather(aux.getFather());
-		aux.setFather(rotate);
-		
-		if (aux.getRightSon() != null) {
-			aux.getRightSon().setFather(aux);
-		}
-		
-	}
-
-	
-	public void rightRotate(CapitalAction rotate) {
-		
-		
-	}
-
-	
-	public void isAction(CapitalAction search) {
-		
-		
-	}
-
-	
-	public void addAction(CapitalAction add) {
-		
-		
-	}
-
-	
-	public void deleteAction(CapitalAction delete) {
-		
-		
-	}
-
-	
-	public CapitalAction searchAction(CapitalAction delete) {
+		//yamado al menor del arbol rojo y negro
 		
 		return null;
 	}
-
 	
-	public void deleteFixup(CapitalAction delete) {
+	//mayor accion de capital
+	public CapitalAction higherAction() {
 		
+		return null;
+	}
+	
+	public void modificed() {
 		
 	}
 	
+	public CapitalAction search(CapitalAction search) {
+		
+		return null;
+	}
+	
+	public void addAction(CapitalAction add) {
+		
+	}
+	
+	public void deleteAction(CapitalAction delete) {
+		
+	}
 	
 	
 }
