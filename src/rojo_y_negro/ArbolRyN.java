@@ -25,21 +25,26 @@ public class ArbolRyN<T> implements IRojoYNegro<T> {
 	@Override
 	public void leftRotate(NodoRyN<T> rotate) {
 
-		NodoRyN<T> aux = rotate;
-		rotate = rotate.getRightSon();
+		NodoRyN<T> aux = rotate; //x
+		rotate = rotate.getRightSon(); //y
 		aux.setRightSon(rotate.getLeftSon());
 		rotate.setLeftSon(aux);
-
-		if (aux.getFather().getLeftSon() == aux) {
+		rotate.setFather(aux.getFather());
+		
+		if(aux.getFather() == null) {
+			root = rotate;
+		}
+		else if (aux.getFather().getLeftSon() == aux) {
 			aux.getFather().setLeftSon(rotate);
 
 		} else {
 			aux.getFather().setRightSon(rotate);
-			;
+			
 		}
 
-		rotate.setFather(aux.getFather());
+		
 		aux.setFather(rotate);
+		rotate.setLeftSon(aux);
 
 		if (aux.getRightSon() != null) {
 			aux.getRightSon().setFather(aux);
@@ -53,8 +58,12 @@ public class ArbolRyN<T> implements IRojoYNegro<T> {
 		rotate = rotate.getLeftSon();
 		aux.setLeftSon(aux.getRightSon());
 		rotate.setRightSon(aux);
+		rotate.setFather(aux.getFather());
 
-		if (aux.getFather().getLeftSon() == aux) {
+		if(aux.getFather() == null) {
+			root = rotate;
+		}
+		else if (aux.getFather().getLeftSon() == aux) {
 			aux.getFather().setLeftSon(rotate);
 
 		} else {
@@ -62,8 +71,9 @@ public class ArbolRyN<T> implements IRojoYNegro<T> {
 			;
 		}
 
-		rotate.setFather(aux.getFather());
+		
 		aux.setFather(rotate);
+		rotate.setRightSon(aux);
 
 		if (aux.getLeftSon() != null) {
 			aux.getLeftSon().setFather(aux);
@@ -141,110 +151,66 @@ public class ArbolRyN<T> implements IRojoYNegro<T> {
 
 			NodoRyN<T> father = add.getFather();
 			if (father.getColor().equals(ROJO)) {
-				// CASO 1
-				NodoRyN<T> grandF = father.getFather();
-				if (grandF.getLeftSon() == father) {
-					// Si tio es derecho y a su vez es rojo
-					
-					if (grandF.getRightSon() != null && grandF.getRightSon().getColor().equals(ROJO)) {
-						AddCaso1(grandF, father, grandF.getRightSon());
-					}
-				} else{
-					if (grandF.getLeftSon() != null && grandF.getLeftSon().getColor().equals(ROJO)) {
-						AddCaso1(grandF, father, grandF.getLeftSon());
-					}
-				}
-			}
-		}
-	}
-
-	public void AddCaso1(NodoRyN<T> grandF, NodoRyN<T> father, NodoRyN<T> uncle) {
-
-		NodoRyN<T> actual = null;
-		father.setColor(NEGRO);
-		uncle.setColor(NEGRO);
-		grandF.setColor(ROJO);
-		actual = grandF;
-		
-		if(actual.getFather().getColor().equals(ROJO)) {
-			NodoRyN<T> grandA = actual.getFather().getFather();
-			
-			//si el tio es negro y el padre es rojo se rota al lado contrario  
-			if(grandA.getLeftSon() != null && grandA.getLeftSon() == actual.getFather()) {
-				if(grandA.getRightSon() != null && grandA.getRightSon().getColor().equals(NEGRO)) {
 				
-					//SE PUEDE HACER EL CASO 3: LINEA O TRIANGULO
-					addCaso2(grandA, actual.getFather(), actual);
-				}
-			}else if(grandA.getRightSon() != null && grandA.getRightSon() == actual.getFather()) {
-				if(grandA.getLeftSon() != null && grandA.getLeftSon().getColor().equals(NEGRO)) {
+				NodoRyN<T> grandF = father.getFather();
+				casesAdd(grandF, father);
+			}
+		}
+	}
+	
+	public void casesAdd(NodoRyN<T> grandF, NodoRyN<T> father) {
+		NodoRyN<T> actual = father;
+		NodoRyN<T> uncle = null;
+		while(actual.getColor().equals(ROJO)) {
+			
+			if(grandF.getLeftSon() == actual) {
+				//CASO 1
+				uncle = grandF.getRightSon();
+				if(uncle.getColor().equals(ROJO)) {
+					actual.setColor(NEGRO);
+					uncle.setColor(NEGRO);
+					grandF.setColor(ROJO);
+					actual = grandF;
 					
-					addCaso2(grandA, actual.getFather(), actual);
-				}
-			}
-		}
-	
-		
-	}
-	
-	public void addCaso3(NodoRyN<T> grandF,NodoRyN<T> father, NodoRyN<T> actual) {
-		
-		//CASO: linea
-		// SI el padre es el hijo izq se rota a la derecka 
-		
-		if(grandF.getLeftSon() == father && father.getLeftSon() == actual) {
-			
-			if(grandF.getColor().equals(ROJO)) {
-				grandF.setColor(NEGRO);
-				if(father.getColor().equals(ROJO)) {
-					father.setColor(NEGRO);
+					//Caso 2: Triangulo
 				}else {
-					father.setColor(ROJO);
+					if(actual.getFather() != null) {
+						if(actual.getFather().getRightSon() == actual) {
+							actual = actual.getFather();
+							leftRotate(actual);
+							
+						}
+						//caso 2: Linea
+						actual.getFather().setColor(NEGRO);
+						actual.getFather().getFather().setColor(ROJO);
+						rightRotate(actual.getFather().getFather());
+					}
 				}
-				rightRotate(father);	
 			}else {
-				grandF.setColor(ROJO);
-				if(father.getColor().equals(ROJO)) {
-					father.setColor(NEGRO);
+				
+				uncle = grandF.getLeftSon();
+				if(uncle.getColor().equals(ROJO)) {
+					actual.setColor(NEGRO);
+					uncle.setColor(NEGRO);
+					grandF.setColor(ROJO);
+					actual = grandF;
+					
+					//Caso 2: Triangulo
 				}else {
-					father.setColor(ROJO);
+					if(actual.getFather() != null) {
+						if(actual.getFather().getLeftSon() == actual) {
+							actual = actual.getFather();
+							rightRotate(actual);
+						}
+						actual.getFather().setColor(NEGRO);
+						actual.getFather().getFather().setColor(ROJO);
+						leftRotate(actual.getFather().getFather());
+					}
 				}
-				rightRotate(father);	
-			}
-			
-		}else if(grandF.getRightSon() == father && father.getRightSon() == actual) {
-			
-			if(grandF.getColor().equals(ROJO)) {
-				grandF.setColor(NEGRO);
-				if(father.getColor().equals(ROJO)) {
-					father.setColor(NEGRO);
-				}else {
-					father.setColor(ROJO);
-				}
-				leftRotate(father);	
-			}else {
-				grandF.setColor(ROJO);
-				if(father.getColor().equals(ROJO)) {
-					father.setColor(NEGRO);
-				}else {
-					father.setColor(ROJO);
-				}
-				leftRotate(father);	
 			}
 			
 		}
-		
-	}
-	public void addCaso2(NodoRyN<T> grandF,NodoRyN<T> father, NodoRyN<T> actual) {
-	
-		//caso 3: Triangulo
-		if(grandF.getLeftSon() == father && father.getRightSon() == actual) {
-			leftRotate(actual);
-			
-		}else if(grandF.getRightSon()== father && father.getLeftSon()== actual) {
-			rightRotate(actual);
-		}
-		//relacion caso 3
+		root.setColor(NEGRO);
 	}
 
 	@Override
