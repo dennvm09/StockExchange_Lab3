@@ -10,8 +10,8 @@ public class NodoRyN<T>  {
 	private NodoRyN<T> rightSon;
 	private NodoRyN<T> father;
 	
-	public NodoRyN(String color, T info, double key) {
-		this.color = color;
+	public NodoRyN(T info, double key) {
+		
 		this.info = info;
 		this.key = key;
 		

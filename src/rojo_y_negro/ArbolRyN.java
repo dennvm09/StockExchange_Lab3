@@ -7,6 +7,8 @@ public class ArbolRyN<T> implements IRojoYNegro<T> {
 
 	public static final String NEGRO = "negro";
 	public static final String ROJO = "rojo";
+	public static final String DNEGRO = "doble negro";
+	
 	private NodoRyN<T> root;
 
 	public ArbolRyN() {
@@ -220,10 +222,69 @@ public class ArbolRyN<T> implements IRojoYNegro<T> {
 		searchT(root, search, found);
 		return found;
 	}
+	
+	public void preOrden(NodoRyN<T> a) {
+		
+		if(!a.isLeaf()) {
+			System.out.println(a);
+			preOrden(a.getLeftSon());
+			preOrden(a.getRightSon());
+		}
+		
+	}
 
 	@Override
 	public void deleteAction(NodoRyN<T> delete) {
 
+		NodoRyN<T> deleteF = searchElement(delete);
+		if(deleteF.getColor().equals(ROJO)) {
+			if(deleteF.isLeaf() == true) {
+				deleteF = null;
+			}
+			else if(deleteF.getRightSon() != null && deleteF.getLeftSon() != null) {
+				//si los dos hijos son diferentes de null
+				NodoRyN<T> actual = deleteF.getLeftSon();
+				while(actual.isLeaf() == false) {
+					actual = actual.getLeftSon();
+				}
+				
+				if( deleteF.getFather().getLeftSon() == deleteF) {
+					actual.getFather().setLeftSon(null);
+					actual.setFather(deleteF.getFather());
+					deleteF.getFather().setLeftSon(actual);
+				}else {
+					actual.getFather().setLeftSon(null);
+					actual.setFather(deleteF.getFather());
+					deleteF.getFather().setRightSon(actual);
+				}
+				
+				actual.setLeftSon(deleteF.getLeftSon());
+				actual.setRightSon(deleteF.getRightSon());
+				
+			}else {
+				
+				if(deleteF.getLeftSon() == null) {
+					if( deleteF.getFather().getLeftSon() == deleteF) {
+						deleteF.getFather().setLeftSon(deleteF.getRightSon());
+						deleteF.getRightSon().setFather(deleteF.getFather());
+					}else {
+						deleteF.getFather().setRightSon(deleteF.getRightSon());
+						deleteF.getRightSon().setFather(deleteF.getFather());
+					}	
+				}else {
+					if( deleteF.getFather().getLeftSon() == deleteF) {
+						deleteF.getFather().setLeftSon(deleteF.getLeftSon());
+						deleteF.getLeftSon().setFather(deleteF.getFather());
+					}else {
+						deleteF.getFather().setRightSon(deleteF.getLeftSon());
+						deleteF.getLeftSon().setFather(deleteF.getFather());
+					}	
+					
+				}
+				
+			}
+		}
+		
 	}
 
 	@Override
@@ -231,4 +292,18 @@ public class ArbolRyN<T> implements IRojoYNegro<T> {
 
 	}
 
+	public static void main(String[] args) {
+		ArbolRyN<Integer> R = new ArbolRyN<>();
+		
+		NodoRyN<Integer> j = new NodoRyN<>( 11, 11.0);
+		R.addElement(j);
+		NodoRyN<Integer> f = new NodoRyN<>( 14, 14.0);
+		NodoRyN<Integer> h = new NodoRyN<>( 2, 2.0);
+		R.addElement(f);
+		R.addElement(h);
+		
+		R.preOrden(j);
+		
+	}
+	
 }
