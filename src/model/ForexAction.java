@@ -9,13 +9,9 @@ public class ForexAction {
 	private double low;
 	private String vol;
 	private double change;
-	private String color;
 	
-	private CapitalAction leftSon;
-	private CapitalAction rightSon;
-	private CapitalAction father;
 	
-	public ForexAction(String date, double price, double open, double high, double low, String vol, double change, String color) {
+	public ForexAction(String date, double price, double open, double high, double low, String vol, double change) {
 		
 		this.date = date;
 		this.price = price;
@@ -24,11 +20,7 @@ public class ForexAction {
 		this.low = low;
 		this.vol = vol;
 		this.change = change;
-		this.color = color;
 		
-		leftSon = null;
-		rightSon = null;
-		father = null;
 		
 	}
 
@@ -88,45 +80,12 @@ public class ForexAction {
 		this.change = change;
 	}
 	
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
-	}
-
-	public CapitalAction getLeftSon() {
-		return leftSon;
-	}
-
-	public void setLeftSon(CapitalAction leftSon) {
-		this.leftSon = leftSon;
-	}
-
-	public CapitalAction getRightSon() {
-		return rightSon;
-	}
-
-	public void setRightSon(CapitalAction rightSon) {
-		this.rightSon = rightSon;
-	}
-
-	public CapitalAction getFather() {
-		return father;
-	}
-
-	public void setFather(CapitalAction father) {
-		this.father = father;
-	}
-	
-	public boolean isLeaf() {
+   public String toString() {
 		
-		if(leftSon == null && rightSon == null) {
-			return true;
-		}else {
-			return false;
-		}
+		String toS = " ";
+		toS = "the information of the action are: \nDate"+date+" Price: "+price+" Open: " +open+" High: "+high+" Low: "+low+" Vol: "+vol+" Change: "+change+"%";
+		
+		return toS;
 	}
 	
 
