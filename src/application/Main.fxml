@@ -1,23 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
-   <children>
-      <ImageView fx:id="imgBanner" fitHeight="113.0" fitWidth="600.0" opacity="0.66" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/stockBanner.jpg" />
-         </image>
-      </ImageView>
-      <Label fx:id="lblTitle" alignment="CENTER" layoutY="21.0" prefHeight="39.0" prefWidth="600.0" text="STOCK EXCHANGE">
-         <font>
-            <Font name="Eras Bold ITC" size="48.0" />
-         </font>
-      </Label>
-   </children>
-</Pane>
+<TabPane fx:id="tabPaneMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="246.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="application.MainController">
+  <tabs>
+    <Tab fx:id="tabMain" text="Principal">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="240.0" prefWidth="600.0">
+               <children>
+                  <ImageView fx:id="imgBanner" fitHeight="178.0" fitWidth="602.0" layoutX="-1.0" opacity="0.61" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/stockBanner.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lblTitle" alignment="CENTER" layoutY="24.0" prefHeight="17.0" prefWidth="600.0" text="STOCK EXCHANGE">
+                     <font>
+                        <Font name="Eras Bold ITC" size="46.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="24.0" layoutY="119.0" text="OPCIONES:">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btPrices" alignment="CENTER" layoutX="68.0" layoutY="159.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="106.0" text="Precios" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btPeriods" layoutX="225.0" layoutY="160.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="151.0" text="Periodos de tiempo">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btActions" layoutX="426.0" layoutY="160.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="106.0" text="Acciones">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab fx:id="tabPrices" text="Precios">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="217.0" prefWidth="600.0">
+               <children>
+                  <Label fx:id="lblOption" layoutX="23.0" layoutY="34.0" text="Consultar:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cbxOption" layoutX="22.0" layoutY="55.0" prefHeight="25.0" prefWidth="115.0" />
+                  <Label fx:id="lblAction" layoutX="186.0" layoutY="34.0" text="Acción:">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cbxAction" layoutX="186.0" layoutY="55.0" prefHeight="25.0" prefWidth="115.0" />
+                  <ImageView fitHeight="123.0" fitWidth="154.0" layoutX="446.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/stockExchange.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lblOptionMsj" layoutX="31.0" layoutY="129.0" text="El precio más alto de la acción">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblActionMsj" layoutX="261.0" layoutY="126.0" text="Label" textFill="#3700ff">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblPriceMsj" layoutX="149.0" layoutY="160.0" text="Label" textFill="#3700ff">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab fx:id="tabPeriods" text="Periodos de tiempo">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+      <Tab fx:id="tabActions" text="Acciones">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+  </tabs>
+</TabPane>
