@@ -1,16 +1,17 @@
 package model;
 
-import stack_Linny.LinnyStack;
+import hash_Linny.HashTableLinny;
 
 public class StockExchange {
 	
 	private String name;
-	private LinnyStack<CapitalMarket> actions;
-	private LinnyStack<ForexMarket> markets;
+	
+	private HashTableLinny<Integer,ForexMarket> forex;
+	private HashTableLinny<Integer,CapitalMarket> markets;
 	
 	public StockExchange(String name) {
 		this.name = name; 
-		actions = null;
+		forex = null;
 		markets = null;
 	}
 
@@ -22,22 +23,42 @@ public class StockExchange {
 		this.name = name;
 	}
 
-	public LinnyStack<CapitalMarket> getActions() {
-		return actions;
+	public HashTableLinny<Integer,ForexMarket> getforex() {
+		return forex;
 	}
 
-	public void setActions(LinnyStack<CapitalMarket> actions) {
-		this.actions = actions;
+	public void setforex(HashTableLinny<Integer,ForexMarket> forex) {
+		this.forex = forex;
 	}
 
-	public LinnyStack<ForexMarket> getMarkets() {
+	public HashTableLinny<Integer,CapitalMarket> getMarkets() {
 		return markets;
 	}
 
-	public void setMarkets(LinnyStack<ForexMarket> markets) {
+	public void setMarkets(HashTableLinny<Integer,CapitalMarket> markets) {
 		this.markets = markets;
 	}
 	
+	public int createKey(String name) {
+		
+		int key = 0;
+		for (int i = 0; i < name.length(); i++) {
+			key += name.charAt(i);	
+		}
+		return key;
+		
+	}
+	
+	public void addCapitalMarket(CapitalMarket add) {	
+		int key = createKey(add.getName());
+		markets.insert(key, add);
+	
+	}
+	
+	public void addForexMarket(ForexMarket add) {
+		int key = createKey(add.getName());
+		forex.insert(key, add);
+	}
 	
 
 }
