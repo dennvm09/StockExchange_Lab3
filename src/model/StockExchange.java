@@ -52,7 +52,6 @@ public class StockExchange {
 	public void addCapitalMarket(CapitalMarket add) {	
 		int key = createKey(add.getName());
 		markets.insert(key, add);
-	
 	}
 	
 	public void addForexMarket(ForexMarket add) {
@@ -60,5 +59,14 @@ public class StockExchange {
 		forex.insert(key, add);
 	}
 	
+	public void deleteCapitalMarket(CapitalMarket delete) {
+		int key = createKey(delete.getName());
+		markets.remove(key, delete);
+	}
 
+	public void deleteForexMarket(ForexMarket delete) {
+		int key = createKey(delete.getName());
+		forex.remove(key, delete);
+	}
+	
 }
