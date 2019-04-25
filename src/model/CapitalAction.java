@@ -81,7 +81,7 @@ public class CapitalAction {
 	public String toString() {
 		
 		String toS = " ";
-		toS = "the information of the action are: \nDate"+date+" Price: "+price+" Open: " +open+" High: "+high+" Low: "+low+" Vol: "+vol+" Change: "+change+"%";
+		toS = "The information of the action is: \nDate: "+date+"\nPrice: "+price+"\nOpen: " +open+"\nHigh: "+high+"\nLow: "+low+"\nVol: "+vol+"\nChange: "+change+"%";
 		
 		return toS;
 	}
