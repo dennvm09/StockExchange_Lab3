@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import rojo_y_negro.ArbolRyN;
+import redBlack.ArbolRyN;
 
 public class RBTTest {
 
