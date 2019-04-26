@@ -1,12 +1,16 @@
 package model;
+import redBlack.RedBlackTree;
 
 public class ForexMarket {
 
 	private String name;
 	private ForexAction root;
+	private RedBlackTree actions;
 
+	
 	public ForexMarket(String name) {
 		this.name = name;
+		actions = null;
 		root = null;
 	}
 
@@ -25,11 +29,19 @@ public class ForexMarket {
 	public void setRoot(ForexAction root) {
 		this.root = root;
 	}
+	
+	public void addForex(ForexAction forex) {
+		actions.insert((Comparable) forex);
+	}
+	
+	public void deleteForex(ForexAction forex) {
+		
+	}
 
 	// menor accion de capital
 	public CapitalAction lessAction() {
 
-		// yamado al menor del arbol rojo y negro
+	
 
 		return null;
 	}
