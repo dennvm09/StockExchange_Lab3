@@ -88,9 +88,6 @@ public class RedBlackTree<T extends Comparable<T>>{
 	        }
 	    }
 
-
-
-
 	    public void preOrderVisit(Visitor v) {
 	        preOrderVisit(root, v);
 	    }
@@ -103,4 +100,6 @@ public class RedBlackTree<T extends Comparable<T>>{
 	        preOrderVisit(node.getLeftChild(), visitor);
 	        preOrderVisit(node.getRightChild(), visitor);
 	    }
+	    
+	 
 }
