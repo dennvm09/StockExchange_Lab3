@@ -31,7 +31,7 @@ public class CapitalMarket{
 	//menor accion de capital
 	public CapitalAction lessAction() {
 		
-		//yamado al menor del arbol rojo y negro
+		//llaamado al menor del arbol rojo y negro
 		
 		return null;
 	}
