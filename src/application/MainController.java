@@ -75,8 +75,8 @@ public class MainController {
 		cbxOption.setItems(FXCollections.observableArrayList("Precio más alto", "Precio más bajo"));
 		cbxAction.setItems(FXCollections.observableArrayList("BTCUSD", "EURUSD", "GBPCD", "USDJPY", "XUUSD"));
 		
-		lblOptionMsj.setVisible(false);
-		lblPriceMsj.setVisible(false);	
-		lblActionMsj.setVisible(false);
+//		lblOptionMsj.setVisible(false);
+//		lblPriceMsj.setVisible(false);	
+//		lblActionMsj.setVisible(false);
 	}
 }
