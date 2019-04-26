@@ -1,13 +1,16 @@
 package application;
 
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.ImageView;
+
 
 public class MainController {
 	
@@ -34,22 +37,27 @@ public class MainController {
 	@FXML
 	private Label lblAction;
 	@FXML
-	private ComboBox<String> cbxOption;
+	private ChoiceBox<String> cbxOption;
 	@FXML
-	private ComboBox<String> cbxAction;
+	private ChoiceBox<String> cbxAction;
 	@FXML
 	private Label lblOptionMsj;
 	@FXML
 	private Label lblActionMsj;
 	@FXML
 	private Label lblPriceMsj;
+	@FXML
+	private DatePicker dateBegin;
+	@FXML
+	private DatePicker dateEnd;
+	
 	
 	/////////////////////////////////////
 	@FXML
 	private Tab tabPeriods;
 	
 	/**
-	 * Aquí van los atributos de periodos de tiempo*/
+	 * Aquï¿½ van los atributos de periodos de tiempo*/
 	
 	////////////////////////////////////
 	
@@ -58,7 +66,17 @@ public class MainController {
 	
 	
 	/**
-	 * Aquí van los atributos de acciones*/
+	 * Aquï¿½ van los atributos de acciones*/
 	
 	////////////////////////////////////
+	
+	
+	public void initialize() {
+		cbxOption.setItems(FXCollections.observableArrayList("Precio mÃ¡s alto", "Precio mÃ¡s bajo"));
+		cbxAction.setItems(FXCollections.observableArrayList("BTCUSD", "EURUSD", "GBPCD", "USDJPY", "XUUSD"));
+		
+		lblOptionMsj.setVisible(false);
+		lblPriceMsj.setVisible(false);	
+		lblActionMsj.setVisible(false);
+	}
 }
